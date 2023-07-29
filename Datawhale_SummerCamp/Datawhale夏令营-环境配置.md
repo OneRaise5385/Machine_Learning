@@ -1,7 +1,7 @@
 # Datawhale夏令营-环境配置
 ## 安装清单：
-1.	Miniconda: https://docs.conda.io/en/latest/miniconda.html/
-2.	Vscode: https://code.visualstudio.com/
+1.	[Miniconda](https://docs.conda.io/en/latest/miniconda.html/)
+2.	[Vscode](https://code.visualstudio.com/)
 ## Miniconda安装及配置
 ### 1. 下载安装
 •	配置推荐：Just me、其他默认配置
