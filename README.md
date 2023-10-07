@@ -4,5 +4,9 @@
 - hw.ipynb为《机器学习方法》课后习题
 - 数据集及其他数据均保存在data中
 
+## Practical-ML
+- 《实践机器学习》
+
+
 ## Datawhale_SummerCamp
 - Datawhale夏令营
