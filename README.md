@@ -5,7 +5,7 @@
 - 数据集及其他数据均保存在data中
 
 ## Practical-ML
-- 《实践机器学习》
+- 《实用机器学习》
 
 
 ## Datawhale_SummerCamp
