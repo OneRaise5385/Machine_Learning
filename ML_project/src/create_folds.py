@@ -4,8 +4,8 @@ from sklearn import model_selection
 
 if __name__ == '__main__':
     # 导入数据
-    df_x = np.loadtxt('input/mnist_x')
-    df_y = np.loadtxt('input/mnist_y')
+    df_x = np.loadtxt('../input/mnist_x')
+    df_y = np.loadtxt('../input/mnist_y')
     df = pd.DataFrame(df_x)
     df['label'] = df_y
     df['kfold'] = -1
@@ -16,4 +16,4 @@ if __name__ == '__main__':
     for fold, (trn_, val_) in enumerate(kf.split(X=df)):
         df.loc[val_, 'kfold'] = fold
     # 保存新的数据集
-    df.to_csv('input/mnist.csv', index=False)
+    df.to_csv('../input/mnist.csv', index=False)
