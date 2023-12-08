@@ -5,6 +5,7 @@ from catboost import CatBoostClassifier
 import xgboost as xgb
 import lightgbm as lgb
 import sklearn.tree as tree
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import StratifiedKFold, KFold, GroupKFold
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, log_loss, mean_squared_log_error
 import sys, os, warnings
@@ -261,5 +262,22 @@ for label in ['label_5','label_10','label_20','label_40','label_60']:
     # 选择cart模型
     cart_test = cv_model(tree.DecisionTreeClassifier,
                          train[cols_x], train[label], test[cols_x], test[label], 'cart')
+    
+    # 选择随机森林算法
+    cart_test = cv_model(RandomForestClassifier,
+                         train[cols_x], train[label], test[cols_x], test[label], 'rf')
+    
     # 选择xgboost模型
     xgb_test = cv_model(xgb, train[cols], train[label], test[cols], test[label], 'xgb')
+
+# 绘制得分图
+f1 = pd.read_csv('input/f1_score.csv')
+plt.figure(figsize=(24,13))
+plt.subplot(221)
+plt.plot(f1['label'],f1['c45'],color='blue', ls='--', label='c45 score')
+plt.plot(f1['label'],f1['cart'],color='red', ls='-.', label='cart score')
+plt.plot(f1['label'],f1['random forest'],color='purple', ls=':', label='random forest')
+plt.plot(f1['label'],f1['xgboost'],color='green', label='xgboost score')
+plt.xlabel('Labels')
+plt.ylabel('F1 score')
+plt.legend()
