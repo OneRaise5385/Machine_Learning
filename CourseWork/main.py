@@ -6,9 +6,9 @@ import xgboost as xgb
 import lightgbm as lgb
 import sklearn.tree as tree
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import StratifiedKFold, KFold, GroupKFold
-from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, log_loss, mean_squared_log_error
-import sys, os, warnings
+from sklearn.model_selection import KFold
+from sklearn.metrics import f1_score
+import os, warnings
 import matplotlib.pyplot as plt
 warnings.filterwarnings('ignore')
 
@@ -164,14 +164,14 @@ for val in ['wap1','wap2','wap_balance','price_spread','bid_spread','ask_spread'
     for loc in [1,5,10,20,40,60]:
         train[f'file_{val}_shift{loc}'] = train.groupby(['file'])[val].shift(loc)
         test[f'file_{val}_shift{loc}'] = test.groupby(['file'])[val].shift(loc)
-    
+
 # 差分特征
 # 获取与历史数据的增长关系
 for val in ['wap1','wap2','wap_balance','price_spread','bid_spread','ask_spread','total_volume','volume_imbalance']:
     for loc in [1,5,10,20,40,60]:
         train[f'file_{val}_diff{loc}'] = train.groupby(['file'])[val].diff(loc)
         test[f'file_{val}_diff{loc}'] = test.groupby(['file'])[val].diff(loc)
-    
+
 # 获取历史信息分布变化信息
 for val in ['wap1','wap2','wap_balance','price_spread','bid_spread','ask_spread','total_volume','volume_imbalance']:
     train[f'file_{val}_win7_mean'] = train.groupby(['file'])[val].transform(lambda x: x.rolling(window=7, min_periods=3).mean())
